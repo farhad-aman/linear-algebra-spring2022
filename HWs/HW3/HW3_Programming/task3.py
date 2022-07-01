@@ -12,6 +12,7 @@ for i in range(toeplitz.shape[0]):
             toeplitz[i][j] = c[j-i]
 curr_row = 0
 curr_col = 0
+interchange = 1
 pivot_rows = []
 pivot_cols = []
 while curr_row < s and curr_col < s:
@@ -29,6 +30,8 @@ while curr_row < s and curr_col < s:
     for i in range(curr_row,s):
         if toeplitz[i][curr_col] != 0:
             toeplitz[[curr_row, i]] = toeplitz[[i, curr_row]]
+            if i != curr_row:
+            	interchange *= -1
             break
     for i in range(curr_row+1, s):
         if toeplitz[i][curr_col] !=0:
@@ -41,4 +44,5 @@ print(toeplitz)
 det = 1
 for i in range(s):
     det *= toeplitz[i][i]
+det *= interchange
 print(det)
